@@ -34,22 +34,22 @@
         <ul class="navbar-nav mx-auto gap-1" id="sectionTabs">
           <li class="nav-item">
             <button class="nav-tab active" data-section="all">
-              <i class="bi bi-grid-3x3-gap me-1"></i>Tudo
+              Tudo
             </button>
           </li>
           <li class="nav-item">
             <button class="nav-tab" data-section="feminino">
-              <i class="bi bi-gender-female me-1"></i>Camisetas
+              Feminino
             </button>
           </li>
           <li class="nav-item">
             <button class="nav-tab" data-section="masculino">
-              <i class="bi bi-gender-male me-1"></i>Bermudas
+              Masculino
             </button>
           </li>
           <li class="nav-item">
             <button class="nav-tab" data-section="acessorios">
-              <i class="bi bi-handbag me-1"></i>Acessórios
+              Acessórios
             </button>
           </li>
           <li class="nav-item">
@@ -69,7 +69,7 @@
     </div>
   </nav>
 
-  <!-- ===== HERO ===== -->
+  <!-- HERO -->
   <section class="hero-section" id="heroArea">
     <div class="hero-bg-text">Lyon</div>
     <div class="container py-5">
@@ -106,12 +106,12 @@
     </div>
   </section>
 
-  <!-- ===== FILTERS BAR ===== -->
+  <!--FILTERS BAR-->
   <div class="filters-bar sticky-filters" id="filtersBar">
     <div class="container-fluid px-4">
       <div class="row align-items-center gy-2">
 
-        <!-- Category filters -->
+        <!--Filtros por categoria-->
         <div class="col-auto">
           <span class="filter-label"><i class="bi bi-funnel me-1"></i>Categoria</span>
         </div>
@@ -120,7 +120,7 @@
             <button class="cat-btn active" data-cat="all">Todos</button>
             <button class="cat-btn" data-cat="camisetas">Camisetas</button>
             <button class="cat-btn" data-cat="calças">Calças</button>
-            <button class="cat-btn" data-cat="vestidos">Vestidos</button>
+            <button class="cat-btn" data-cat="bermudas">Bermudas</button>
             <button class="cat-btn" data-cat="casacos">Casacos</button>
             <button class="cat-btn" data-cat="acessórios">Acessórios</button>
           </div>
@@ -130,7 +130,7 @@
           <div class="filter-divider"></div>
         </div>
 
-        <!-- Price filter -->
+        <!--filtros de preço-->
         <div class="col-auto d-flex align-items-center gap-3">
           <span class="filter-label"><i class="bi bi-currency-dollar me-1"></i>Preço máx.</span>
           <div class="price-range-wrap">
@@ -140,7 +140,7 @@
           <span class="price-display" id="priceDisplay">até R$ 600</span>
         </div>
 
-        <!-- Sort -->
+        <!--ordenação-->
         <div class="col-auto ms-auto">
           <select class="sort-select" id="sortSelect">
             <option value="default">Ordenar</option>
@@ -154,10 +154,10 @@
     </div>
   </div>
 
-  <!-- ===== MAIN CONTENT ===== -->
+  <!--MAIN-->
   <main class="main-content">
 
-    <!-- ALL SECTION -->
+    <!--todas as sections-->
     <section class="store-section active" id="all-section">
       <div class="container-fluid px-4">
         <div class="section-header">
@@ -169,15 +169,15 @@
       </div>
     </section>
 
-    <!-- CAMISETAS SECTION -->
+    <!-- FEMININO-->
     <section class="store-section" id="camisetas-section">
       <div class="container-fluid px-4">
         <div class="section-header">
-          <h2 class="section-title">Camisetas</h2>
+          <h2 class="section-title">Feminino</h2>
           <p class="section-subtitle">Para cada momento, uma peça perfeita</p>
-          <span class="results-count" id="camisetas-count"></span>
+          <span class="results-count" id="feminino-count"></span>
         </div>
-        <div class="row g-4" id="camisetas-grid"></div>
+        <div class="row g-4" id="feminino-grid"></div>
       </div>
     </section>
 

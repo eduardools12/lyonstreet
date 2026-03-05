@@ -1,20 +1,15 @@
-/* =============================================
-   VELOUR — Loja de Roupas
-   script.js
-   ============================================= */
-
 'use strict';
 
-// ─── CONFIGURAÇÃO ────────────────────────────────────────────────────────────
+// CONFIGURAÇÃO
 const WHATSAPP_NUMBER = '5534999916990'; // ← Substitua pelo número real (DDI + DDD + número)
 
-// ─── PRODUTOS ────────────────────────────────────────────────────────────────
+// PRODUTOS
 const products = [
   // FEMININO
   {
     id: 1, code: 'VLR-F001',
     name: 'Camiseta Linho Suave',
-    category: 'camisetas', gender: 'camisetas',
+    category: 'camisetas', gender: 'masculino',
     price: 189, originalPrice: null,
     emoji: '👚',
     desc: 'Blusa em linho com caimento fluido, perfeita para dias quentes. Tecido respirável e textura natural que proporciona máximo conforto ao longo do dia.',
@@ -23,11 +18,11 @@ const products = [
   },
   {
     id: 2, code: 'VLR-F002',
-    name: 'Vestido Midi Floral',
-    category: 'vestidos', gender: 'feminino',
+    name: 'Bermuda Midi Floral',
+    category: 'camisetas', gender: 'feminino',
     price: 259, originalPrice: 380,
     emoji: '👗',
-    desc: 'Vestido midi com estampa floral exclusiva, abertura frontal e cinto incluso. Tecido leve e elegante, perfeito para ocasiões especiais e jantares.',
+    desc: 'Bermuda midi com estampa floral exclusiva, abertura frontal e cinto incluso. Tecido leve e elegante, perfeito para ocasiões especiais e jantares.',
     sizes: ['PP', 'P', 'M', 'G'],
     isNew: false, isPromo: true,
   },
@@ -64,7 +59,7 @@ const products = [
   {
     id: 6, code: 'VLR-F006',
     name: 'Saia Plissada Midi',
-    category: 'vestidos', gender: 'feminino',
+    category: 'bermudas', gender: 'feminino',
     price: 199, originalPrice: 280,
     emoji: '🩱',
     desc: 'Saia plissada com movimento fluido e cintura elástica confortável. Disponível em várias cores, perfeita para ocasiões do dia e da noite.',
@@ -177,7 +172,7 @@ const products = [
   },
 ];
 
-// ─── ESTADO ──────────────────────────────────────────────────────────────────
+// ESTADO
 let state = {
   section:      'all',
   category:     'all',
@@ -187,7 +182,7 @@ let state = {
   cartCount:    0,
 };
 
-// ─── UTILITÁRIOS ─────────────────────────────────────────────────────────────
+// UTILITÁRIOS
 
 /**
  * Calcula o percentual de desconto de um produto.
@@ -231,7 +226,7 @@ function getFiltered(sectionFilter) {
   return list;
 }
 
-// ─── RENDERIZAÇÃO ─────────────────────────────────────────────────────────────
+// RENDERIZAÇÃO
 
 /**
  * Gera o HTML de um card de produto.
@@ -307,7 +302,7 @@ function renderGrid(gridId, items, countId) {
 }
 
 /**
- * Re-renderiza todos os grids com base no estado atual.
+ * Re-renderiza todos os grids com base no estado.
  */
 function renderAll() {
   renderGrid('all-grid',        getFiltered(() => true),                    'all-count');
@@ -317,10 +312,10 @@ function renderAll() {
   renderGrid('promo-grid',      getFiltered(p => p.isPromo),                'promo-count');
 }
 
-// ─── NAVEGAÇÃO POR ABAS ──────────────────────────────────────────────────────
+// NAVEGAÇÃO POR ABAS
 
 /**
- * Exibe a seção escolhida e atualiza estado.
+ * Exibe a seção escolhida.
  * @param {string} section
  */
 function showSection(section) {
@@ -336,7 +331,7 @@ function showSection(section) {
     btn.classList.toggle('active', btn.dataset.section === section);
   });
 
-  // Hero só aparece na aba "Tudo"
+  // Hero só aparece na aba "tudo"
   const heroArea = document.getElementById('heroArea');
   if (heroArea) heroArea.style.display = section === 'all' ? '' : 'none';
 
@@ -344,10 +339,9 @@ function showSection(section) {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// ─── FILTROS ─────────────────────────────────────────────────────────────────
-
+// FILTROS
 /**
- * Atualiza o filtro de categoria.
+ * Atualiza o filtros.
  * @param {string} cat
  * @param {HTMLElement} btn
  */
@@ -379,10 +373,10 @@ function sortProducts(value) {
   renderAll();
 }
 
-// ─── MODAL ───────────────────────────────────────────────────────────────────
+// MODAL
 
 /**
- * Abre o modal de detalhe de um produto.
+ * Abre o modal de um produto.
  * @param {number} id
  */
 function openModal(id) {
@@ -482,11 +476,7 @@ function copyCode() {
   });
 }
 
-// ─── ANIMAÇÃO DE ENTRADA ─────────────────────────────────────────────────────
-
-/**
- * Aplica animação de entrada nos elementos com [data-animate].
- */
+// ANIMAÇÃO DE ENTRADA
 function initAnimations() {
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -500,11 +490,7 @@ function initAnimations() {
   document.querySelectorAll('[data-animate]').forEach(el => observer.observe(el));
 }
 
-// ─── NAVBAR SCROLL ────────────────────────────────────────────────────────────
-
-/**
- * Adiciona classe ao navbar quando a página é rolada.
- */
+// NAVBAR SCROLL
 function initNavbarScroll() {
   const navbar = document.getElementById('mainNavbar');
   window.addEventListener('scroll', () => {
@@ -514,21 +500,21 @@ function initNavbarScroll() {
   }, { passive: true });
 }
 
-// ─── INICIALIZAÇÃO ────────────────────────────────────────────────────────────
+// INICIALIZAÇÃO
 
 document.addEventListener('DOMContentLoaded', () => {
 
-  // Tabs de seção
+  // seção
   document.querySelectorAll('.nav-tab').forEach(btn => {
     btn.addEventListener('click', () => showSection(btn.dataset.section));
   });
 
-  // Filtros de categoria
+  // Filtros
   document.querySelectorAll('.cat-btn').forEach(btn => {
     btn.addEventListener('click', () => filterCategory(btn.dataset.cat, btn));
   });
 
-  // Slider de preço
+  // barra de preço
   const priceRange = document.getElementById('priceRange');
   priceRange.style.setProperty('--pct', '100%');
   priceRange.addEventListener('input', () => filterPrice(priceRange));
@@ -541,7 +527,6 @@ document.addEventListener('DOMContentLoaded', () => {
   // Botão copiar código
   document.getElementById('copyCodeBtn').addEventListener('click', copyCode);
 
-  // Render inicial
   renderAll();
   initAnimations();
   initNavbarScroll();
