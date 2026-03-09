@@ -1,47 +1,47 @@
 'use strict';
 
-// CONFIGURAÇÃO
-const WHATSAPP_NUMBER = '5534999916990'; // ← Substitua pelo número real (DDI + DDD + número)
+// ─── CONFIGURAÇÃO ────────────────────────────────────────────────────────────
+const WHATSAPP_NUMBER = '5511999999999'; // ← Substitua pelo número real (DDI + DDD + número)
 
-// PRODUTOS
+// ─── PRODUTOS ────────────────────────────────────────────────────────────────
 const products = [
   // FEMININO
   {
     id: 1, code: 'VLR-F001',
-    name: 'Camiseta Linho Suave',
+    name: 'Blusa Linho Suave',
     category: 'camisetas', gender: 'masculino',
     price: 189, originalPrice: null,
-    emoji: '👚',
+    image: 'img/polo.jpg',
     desc: 'Blusa em linho com caimento fluido, perfeita para dias quentes. Tecido respirável e textura natural que proporciona máximo conforto ao longo do dia.',
     sizes: ['PP', 'P', 'M', 'G', 'GG'],
     isNew: true, isPromo: false,
   },
   {
     id: 2, code: 'VLR-F002',
-    name: 'Bermuda Midi Floral',
-    category: 'camisetas', gender: 'feminino',
+    name: 'Vestido Midi Floral',
+    category: 'vestidos', gender: 'feminino' ,
     price: 259, originalPrice: 380,
-    emoji: '👗',
-    desc: 'Bermuda midi com estampa floral exclusiva, abertura frontal e cinto incluso. Tecido leve e elegante, perfeito para ocasiões especiais e jantares.',
+    image: 'images/vestido-midi-floral.jpg',
+    desc: 'Vestido midi com estampa floral exclusiva, abertura frontal e cinto incluso. Tecido leve e elegante, perfeito para ocasiões especiais e jantares.',
     sizes: ['PP', 'P', 'M', 'G'],
     isNew: false, isPromo: true,
   },
   {
     id: 3, code: 'VLR-F003',
-    name: 'Calça Wide Leg Premium',
+    name: 'Calça Cargo Preta',
     category: 'calças', gender: 'feminino',
     price: 229, originalPrice: null,
-    emoji: '👖',
+    image: 'img/cargo.jpg',
     desc: 'Calça wide leg de alfaiataria com tecido de alta qualidade. Versatilidade e elegância para o ambiente corporativo e look casual de luxo.',
     sizes: ['36', '38', '40', '42', '44'],
     isNew: false, isPromo: false,
   },
   {
     id: 4, code: 'VLR-F004',
-    name: 'Casaco Oversized Tweed',
-    category: 'casacos', gender: 'feminino',
+    name: 'Calça estona Feminina',
+    category: 'calças', gender: 'feminino',
     price: 349, originalPrice: 490,
-    emoji: '🧥',
+    image: 'img/estona.jpg',
     desc: 'Casaco oversized em tweed com botões dourados e forro interno. Uma peça atemporal que eleva qualquer look com sofisticação.',
     sizes: ['P', 'M', 'G'],
     isNew: false, isPromo: true,
@@ -51,7 +51,7 @@ const products = [
     name: 'Top Cropped Cetim',
     category: 'camisetas', gender: 'feminino',
     price: 149, originalPrice: null,
-    emoji: '👙',
+    image: 'images/top-cropped-cetim.jpg',
     desc: 'Top cropped em cetim com alças finas e detalhe franzido na frente. Ideal para composições fashion com calça de alfaiataria ou saia midi.',
     sizes: ['PP', 'P', 'M', 'G'],
     isNew: true, isPromo: false,
@@ -59,9 +59,9 @@ const products = [
   {
     id: 6, code: 'VLR-F006',
     name: 'Saia Plissada Midi',
-    category: 'bermudas', gender: 'feminino',
+    category: 'vestidos', gender: 'feminino',
     price: 199, originalPrice: 280,
-    emoji: '🩱',
+    image: 'images/saia-plissada-midi.jpg',
     desc: 'Saia plissada com movimento fluido e cintura elástica confortável. Disponível em várias cores, perfeita para ocasiões do dia e da noite.',
     sizes: ['P', 'M', 'G', 'GG'],
     isNew: false, isPromo: true,
@@ -73,7 +73,7 @@ const products = [
     name: 'Camiseta Pima Cotton',
     category: 'camisetas', gender: 'masculino',
     price: 129, originalPrice: null,
-    emoji: '👕',
+    image: 'images/camiseta-pima-cotton.jpg',
     desc: 'Camiseta de algodão Pima com corte slim e costura reforçada. Tecido macio ao toque com durabilidade superior e toque premium.',
     sizes: ['P', 'M', 'G', 'GG', 'XG'],
     isNew: true, isPromo: false,
@@ -83,7 +83,7 @@ const products = [
     name: 'Calça Chino Slim Fit',
     category: 'calças', gender: 'masculino',
     price: 219, originalPrice: 310,
-    emoji: '👖',
+    image: 'images/calca-chino-slim-fit.jpg',
     desc: 'Calça chino slim fit com acabamento refinado e tecido stretch para maior mobilidade. Versátil para ambientes formais e looks casuais.',
     sizes: ['38', '40', '42', '44', '46'],
     isNew: false, isPromo: true,
@@ -93,7 +93,7 @@ const products = [
     name: 'Camisa Linho Oxford',
     category: 'camisetas', gender: 'masculino',
     price: 189, originalPrice: null,
-    emoji: '👔',
+    image: 'images/camisa-linho-oxford.jpg',
     desc: 'Camisa de linho no estilo oxford com botões perolados e acabamento impecável. Leveza e frescor garantidos para o dia a dia.',
     sizes: ['P', 'M', 'G', 'GG'],
     isNew: false, isPromo: false,
@@ -103,7 +103,7 @@ const products = [
     name: 'Jaqueta Jeans Vintage',
     category: 'casacos', gender: 'masculino',
     price: 299, originalPrice: 420,
-    emoji: '🧥',
+    image: 'images/jaqueta-jeans-vintage.jpg',
     desc: 'Jaqueta jeans lavagem vintage com detalhes desgastados autênticos. Um clássico reinventado para o guarda-roupa masculino moderno.',
     sizes: ['P', 'M', 'G', 'GG'],
     isNew: false, isPromo: true,
@@ -113,7 +113,7 @@ const products = [
     name: 'Bermuda Linho Italiano',
     category: 'calças', gender: 'masculino',
     price: 169, originalPrice: null,
-    emoji: '🩳',
+    image: 'images/bermuda-linho-italiano.jpg',
     desc: 'Bermuda em linho italiano com bolsos funcionais e cintura ajustável. Conforto máximo e estilo para os dias de calor.',
     sizes: ['38', '40', '42', '44', '46'],
     isNew: true, isPromo: false,
@@ -123,7 +123,7 @@ const products = [
     name: 'Moletom Fleece Premium',
     category: 'casacos', gender: 'masculino',
     price: 239, originalPrice: 320,
-    emoji: '🧣',
+    image: 'images/moletom-fleece-premium.jpg',
     desc: 'Moletom oversized em fleece premium com capuz e bolso canguru. Máximo conforto e estilo para os dias mais frios do ano.',
     sizes: ['M', 'G', 'GG', 'XG'],
     isNew: false, isPromo: true,
@@ -135,7 +135,7 @@ const products = [
     name: 'Cinto Couro Artesanal',
     category: 'acessórios', gender: 'acessorios',
     price: 139, originalPrice: null,
-    emoji: '🪢',
+    image: 'images/cinto-couro-artesanal.jpg',
     desc: 'Cinto em couro legítimo artesanal com fivela dourada. Cada peça é feita à mão pelos melhores artesãos, garantindo unicidade e qualidade.',
     sizes: ['Único'],
     isNew: false, isPromo: false,
@@ -145,7 +145,7 @@ const products = [
     name: 'Bolsa Tote Canvas',
     category: 'acessórios', gender: 'acessorios',
     price: 179, originalPrice: 250,
-    emoji: '👜',
+    image: 'images/bolsa-tote-canvas.jpg',
     desc: 'Bolsa tote em canvas resistente com alças reforçadas de couro. Espaçosa e elegante para o uso diário, com bolso interno organizado.',
     sizes: ['Único'],
     isNew: false, isPromo: true,
@@ -155,7 +155,7 @@ const products = [
     name: 'Boné Aba Curva',
     category: 'acessórios', gender: 'acessorios',
     price: 89, originalPrice: null,
-    emoji: '🧢',
+    image: 'images/bone-aba-curva.jpg',
     desc: 'Boné de aba curva em algodão premium com bordado frontal exclusivo. Ajustável e extremamente confortável para o uso diário.',
     sizes: ['Único'],
     isNew: true, isPromo: false,
@@ -165,14 +165,14 @@ const products = [
     name: 'Lenço Seda Italiana',
     category: 'acessórios', gender: 'acessorios',
     price: 119, originalPrice: 180,
-    emoji: '🧣',
+    image: 'images/lenco-seda-italiana.jpg',
     desc: 'Lenço em seda italiana com estampa exclusiva e borda trabalhada. Extremamente versátil: use no pescoço, como lenço de bolso ou nos cabelos.',
     sizes: ['Único'],
     isNew: false, isPromo: true,
   },
 ];
 
-// ESTADO
+// ─── ESTADO ──────────────────────────────────────────────────────────────────
 let state = {
   section:      'all',
   category:     'all',
@@ -182,7 +182,7 @@ let state = {
   cartCount:    0,
 };
 
-// UTILITÁRIOS
+// ─── UTILITÁRIOS ─────────────────────────────────────────────────────────────
 
 /**
  * Calcula o percentual de desconto de um produto.
@@ -226,7 +226,7 @@ function getFiltered(sectionFilter) {
   return list;
 }
 
-// RENDERIZAÇÃO
+// ─── RENDERIZAÇÃO ─────────────────────────────────────────────────────────────
 
 /**
  * Gera o HTML de um card de produto.
@@ -255,7 +255,7 @@ function cardHTML(p) {
            onclick="openModal(${p.id})"
            onkeydown="if(event.key==='Enter')openModal(${p.id})">
         <div class="product-thumb">
-          ${p.emoji}
+          <img src="${p.image}" alt="${p.name}" class="product-card-img">
           ${badge}
           <div class="badge-wishlist" title="Favoritar" onclick="event.stopPropagation()">
             <i class="bi bi-heart"></i>
@@ -302,7 +302,7 @@ function renderGrid(gridId, items, countId) {
 }
 
 /**
- * Re-renderiza todos os grids com base no estado.
+ * Re-renderiza todos os grids com base no estado atual.
  */
 function renderAll() {
   renderGrid('all-grid',        getFiltered(() => true),                    'all-count');
@@ -312,10 +312,10 @@ function renderAll() {
   renderGrid('promo-grid',      getFiltered(p => p.isPromo),                'promo-count');
 }
 
-// NAVEGAÇÃO POR ABAS
+// ─── NAVEGAÇÃO POR ABAS ──────────────────────────────────────────────────────
 
 /**
- * Exibe a seção escolhida.
+ * Exibe a seção escolhida e atualiza estado.
  * @param {string} section
  */
 function showSection(section) {
@@ -331,7 +331,7 @@ function showSection(section) {
     btn.classList.toggle('active', btn.dataset.section === section);
   });
 
-  // Hero só aparece na aba "tudo"
+  // Hero só aparece na aba "Tudo"
   const heroArea = document.getElementById('heroArea');
   if (heroArea) heroArea.style.display = section === 'all' ? '' : 'none';
 
@@ -339,9 +339,10 @@ function showSection(section) {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// FILTROS
+// ─── FILTROS ─────────────────────────────────────────────────────────────────
+
 /**
- * Atualiza o filtros.
+ * Atualiza o filtro de categoria.
  * @param {string} cat
  * @param {HTMLElement} btn
  */
@@ -373,10 +374,10 @@ function sortProducts(value) {
   renderAll();
 }
 
-// MODAL
+// ─── MODAL ───────────────────────────────────────────────────────────────────
 
 /**
- * Abre o modal de um produto.
+ * Abre o modal de detalhe de um produto.
  * @param {number} id
  */
 function openModal(id) {
@@ -388,7 +389,7 @@ function openModal(id) {
 
   // Imagem / emoji
   const imgEl = document.getElementById('modalImg');
-  imgEl.innerHTML = p.emoji;
+  imgEl.innerHTML = `<img src="${p.image}" alt="${p.name}" class="img-fluid">`;
   if (p.isPromo) {
     imgEl.innerHTML += `<span class="badge-promo" style="top:14px;left:14px;position:absolute">-${pct}%</span>`;
   } else if (p.isNew) {
@@ -476,7 +477,11 @@ function copyCode() {
   });
 }
 
-// ANIMAÇÃO DE ENTRADA
+// ─── ANIMAÇÃO DE ENTRADA ─────────────────────────────────────────────────────
+
+/**
+ * Aplica animação de entrada nos elementos com [data-animate].
+ */
 function initAnimations() {
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -490,7 +495,11 @@ function initAnimations() {
   document.querySelectorAll('[data-animate]').forEach(el => observer.observe(el));
 }
 
-// NAVBAR SCROLL
+// ─── NAVBAR SCROLL ────────────────────────────────────────────────────────────
+
+/**
+ * Adiciona classe ao navbar quando a página é rolada.
+ */
 function initNavbarScroll() {
   const navbar = document.getElementById('mainNavbar');
   window.addEventListener('scroll', () => {
@@ -500,21 +509,21 @@ function initNavbarScroll() {
   }, { passive: true });
 }
 
-// INICIALIZAÇÃO
+// ─── INICIALIZAÇÃO ────────────────────────────────────────────────────────────
 
 document.addEventListener('DOMContentLoaded', () => {
 
-  // seção
+  // Tabs de seção
   document.querySelectorAll('.nav-tab').forEach(btn => {
     btn.addEventListener('click', () => showSection(btn.dataset.section));
   });
 
-  // Filtros
+  // Filtros de categoria
   document.querySelectorAll('.cat-btn').forEach(btn => {
     btn.addEventListener('click', () => filterCategory(btn.dataset.cat, btn));
   });
 
-  // barra de preço
+  // Slider de preço
   const priceRange = document.getElementById('priceRange');
   priceRange.style.setProperty('--pct', '100%');
   priceRange.addEventListener('input', () => filterPrice(priceRange));
@@ -527,6 +536,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Botão copiar código
   document.getElementById('copyCodeBtn').addEventListener('click', copyCode);
 
+  // Render inicial
   renderAll();
   initAnimations();
   initNavbarScroll();
