@@ -1,13 +1,7 @@
-/* =============================================
-   VELOUR — Loja de Roupas
-   style.css
-   ============================================= */
-
-/* ----- CSS VARIABLES ----- */
 :root {
   --cream:        #F6F1E9;
   --dark:         #16120E;
-  --gold:         #C9954C;
+  --gold:         #E64A26;
   --gold-light:   #E8C07A;
   --rose:         #C9848A;
   --muted:        #7A6E65;
@@ -34,14 +28,12 @@ body {
   overflow-x: hidden;
 }
 
-/* ----- SCROLLBAR ----- */
+/* SCROLLBAR */
 ::-webkit-scrollbar { width: 5px; }
 ::-webkit-scrollbar-track { background: var(--cream); }
 ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 4px; }
 
-/* =============================================
-   NAVBAR
-   ============================================= */
+/* NAVBAR */
 #mainNavbar {
   background: var(--dark);
   border-bottom: 1px solid rgba(201, 149, 76, 0.25);
