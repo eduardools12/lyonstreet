@@ -16,7 +16,7 @@
   --transition:   0.28s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* ----- BASE ----- */
+/* ----- BASE & TIPOGRAFIA GLOBAL ----- */
 *, *::before, *::after { box-sizing: border-box; }
 
 html { scroll-behavior: smooth; }
@@ -26,6 +26,23 @@ body {
   background-color: var(--cream);
   color: var(--dark);
   overflow-x: hidden;
+}
+
+/* Faz com que elementos de formulário herdem o Nunito Sans do body */
+input, button, select, textarea { font-family: inherit; }
+
+/* Agrupamento da fonte Playfair Display */
+.logo, .hero-bg-text, .hero-title, .stat-num, .section-title,
+.promo-banner-bg-text, .promo-banner-title, .promo-pct, .promo-pct-sign,
+.product-name, .no-results p, .modal-product-name, .code-value,
+.modal-price-now, .login-side-bg-text, .login-side-tagline, .login-title {
+  font-family: 'Playfair Display', serif;
+}
+
+/* Agrupamento do destaque em itálico */
+.logo em, .hero-title em, .promo-banner-title em, .login-side-tagline em {
+  font-style: italic;
+  color: var(--gold);
 }
 
 /* SCROLLBAR */
@@ -42,9 +59,7 @@ body {
   z-index: 1050;
 }
 
-/* Logo */
 .logo {
-  font-family: 'Playfair Display', serif;
   font-size: 1.75rem;
   font-weight: 400;
   letter-spacing: 0.28em;
@@ -52,12 +67,7 @@ body {
   text-decoration: none;
   line-height: 1;
 }
-.logo em {
-  font-style: italic;
-  color: var(--gold);
-}
 
-/* Toggler */
 .navbar-toggler {
   border-color: rgba(201,149,76,0.4);
   padding: 6px 10px;
@@ -66,12 +76,10 @@ body {
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(201,149,76,0.9)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
 }
 
-/* Nav tabs */
 .nav-tab {
   background: none;
   border: none;
   color: rgba(246, 241, 233, 0.55);
-  font-family: 'Nunito Sans', sans-serif;
   font-size: 0.78rem;
   font-weight: 600;
   letter-spacing: 0.13em;
@@ -93,16 +101,12 @@ body {
   transition: transform var(--transition);
 }
 .nav-tab:hover,
-.nav-tab.active {
-  color: var(--cream);
-}
+.nav-tab.active { color: var(--cream); }
+
 .nav-tab.active::after,
-.nav-tab:hover::after {
-  transform: scaleX(1);
-}
-.nav-tab.promo-tab {
-  color: var(--rose);
-}
+.nav-tab:hover::after { transform: scaleX(1); }
+
+.nav-tab.promo-tab { color: var(--rose); }
 .nav-tab.promo-tab::after { display: none; }
 .nav-tab.promo-tab:hover,
 .nav-tab.promo-tab.active {
@@ -111,7 +115,6 @@ body {
   border-radius: 4px;
 }
 
-/* Cart badge */
 .cart-count {
   display: flex;
   align-items: center;
@@ -146,7 +149,6 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-family: 'Playfair Display', serif;
   font-size: clamp(6rem, 18vw, 18rem);
   font-weight: 700;
   color: rgba(255,255,255,0.03);
@@ -169,7 +171,6 @@ body {
   margin-bottom: 20px;
 }
 .hero-title {
-  font-family: 'Playfair Display', serif;
   font-size: clamp(2.6rem, 5vw, 4.2rem);
   font-weight: 400;
   color: var(--cream);
@@ -177,26 +178,19 @@ body {
   letter-spacing: -0.01em;
   margin-bottom: 16px;
 }
-.hero-title em {
-  font-style: italic;
-  color: var(--gold);
-}
 .hero-sub {
   color: rgba(246,241,233,0.45);
   font-size: 0.9rem;
   letter-spacing: 0.06em;
   margin-bottom: 0;
 }
-.hero-stats {
-  padding-top: 6px;
-}
+.hero-stats { padding-top: 6px; }
 .stat-item {
   display: flex;
   flex-direction: column;
   gap: 2px;
 }
 .stat-num {
-  font-family: 'Playfair Display', serif;
   font-size: 1.6rem;
   color: var(--gold);
   font-weight: 600;
@@ -215,7 +209,7 @@ body {
   align-self: center;
 }
 
-/* Hero card stack */
+/* Hero card stack (Otimizado com Variável CSS) */
 .hero-card-stack {
   position: relative;
   width: 220px;
@@ -234,13 +228,11 @@ body {
   border: 1px solid rgba(201,149,76,0.2);
   backdrop-filter: blur(4px);
 }
-.card-1 { top: 0; right: 0; z-index: 3; background: rgba(201,149,76,0.08); animation: float1 4s ease-in-out infinite; }
-.card-2 { top: 60px; right: 70px; z-index: 2; animation: float2 4s ease-in-out infinite 0.8s; }
-.card-3 { top: 110px; right: 20px; z-index: 1; animation: float3 4s ease-in-out infinite 1.6s; }
+.card-1 { top: 0; right: 0; z-index: 3; background: rgba(201,149,76,0.08); --fy: -10px; animation: float 4s ease-in-out infinite; }
+.card-2 { top: 60px; right: 70px; z-index: 2; --fy: -7px; animation: float 4s ease-in-out infinite 0.8s; }
+.card-3 { top: 110px; right: 20px; z-index: 1; --fy: -12px; animation: float 4s ease-in-out infinite 1.6s; }
 
-@keyframes float1 { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
-@keyframes float2 { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-7px)} }
-@keyframes float3 { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-12px)} }
+@keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(var(--fy))} }
 
 /* Animations */
 [data-animate] { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
@@ -268,13 +260,11 @@ body {
   white-space: nowrap;
 }
 
-/* Category buttons */
 .cat-btn {
   background: none;
   border: 1px solid var(--border);
   border-radius: 100px;
   padding: 5px 16px;
-  font-family: 'Nunito Sans', sans-serif;
   font-size: 0.8rem;
   font-weight: 500;
   color: var(--dark);
@@ -282,11 +272,11 @@ body {
   transition: all var(--transition);
   letter-spacing: 0.02em;
 }
-.cat-btn:hover {
-  border-color: var(--gold);
-  color: var(--gold);
-}
-.cat-btn.active {
+.cat-btn:hover { border-color: var(--gold); color: var(--gold); }
+
+/* Estados ativos unificados */
+.cat-btn.active,
+.size-opt.active {
   background: var(--dark);
   border-color: var(--dark);
   color: var(--cream);
@@ -298,7 +288,6 @@ body {
   background: var(--border);
 }
 
-/* Price slider */
 .price-range-wrap { display: flex; align-items: center; }
 .price-slider {
   -webkit-appearance: none;
@@ -335,13 +324,11 @@ body {
   min-width: 90px;
 }
 
-/* Sort select */
 .sort-select {
   background: var(--light-bg);
   border: 1px solid var(--border);
   border-radius: 6px;
   padding: 6px 14px;
-  font-family: 'Nunito Sans', sans-serif;
   font-size: 0.8rem;
   color: var(--dark);
   cursor: pointer;
@@ -361,10 +348,7 @@ body {
    ============================================= */
 .main-content { padding-top: 10px; }
 
-.store-section {
-  display: none;
-  padding: 40px 0 70px;
-}
+.store-section { display: none; padding: 40px 0 70px; }
 .store-section.active { display: block; }
 
 .section-header {
@@ -374,7 +358,6 @@ body {
   gap: 4px;
 }
 .section-title {
-  font-family: 'Playfair Display', serif;
   font-size: 2.2rem;
   font-weight: 400;
   letter-spacing: 0.01em;
@@ -409,7 +392,6 @@ body {
   right: -20px;
   top: 50%;
   transform: translateY(-50%);
-  font-family: 'Playfair Display', serif;
   font-size: 10rem;
   color: rgba(255,255,255,0.04);
   font-weight: 700;
@@ -428,16 +410,11 @@ body {
   margin-bottom: 14px;
 }
 .promo-banner-title {
-  font-family: 'Playfair Display', serif;
   font-size: clamp(1.8rem, 3.5vw, 2.8rem);
   font-weight: 400;
   color: var(--cream);
   line-height: 1.15;
   margin-bottom: 10px;
-}
-.promo-banner-title em {
-  font-style: italic;
-  color: var(--gold);
 }
 .promo-banner-sub {
   color: rgba(246,241,233,0.45);
@@ -451,13 +428,11 @@ body {
   color: var(--gold);
 }
 .promo-pct {
-  font-family: 'Playfair Display', serif;
   font-size: 6rem;
   font-weight: 700;
   line-height: 1;
 }
 .promo-pct-sign {
-  font-family: 'Playfair Display', serif;
   font-size: 1.8rem;
   font-weight: 600;
   line-height: 1.1;
@@ -504,7 +479,6 @@ body {
   background: linear-gradient(to bottom, transparent 60%, rgba(22,18,14,0.06) 100%);
 }
 
-/* Badges */
 .badge-promo,
 .badge-new {
   position: absolute;
@@ -520,6 +494,7 @@ body {
 }
 .badge-promo { background: var(--promo-red); color: #fff; }
 .badge-new { background: var(--dark); color: var(--cream); }
+
 .badge-wishlist {
   position: absolute;
   top: 12px;
@@ -553,7 +528,6 @@ body {
   margin-bottom: 6px;
 }
 .product-name {
-  font-family: 'Playfair Display', serif;
   font-size: 1.15rem;
   font-weight: 400;
   line-height: 1.35;
@@ -571,7 +545,6 @@ body {
   font-size: 1.05rem;
   font-weight: 700;
   color: var(--dark);
-  font-family: 'Nunito Sans', sans-serif;
 }
 .price-was {
   font-size: 0.82rem;
@@ -588,7 +561,6 @@ body {
   letter-spacing: 0.04em;
 }
 
-/* No results */
 .no-results {
   grid-column: 1 / -1;
   text-align: center;
@@ -597,7 +569,6 @@ body {
 }
 .no-results .no-icon { font-size: 3.5rem; margin-bottom: 16px; display: block; }
 .no-results p {
-  font-family: 'Playfair Display', serif;
   font-size: 1.3rem;
   color: var(--muted);
   margin: 0;
@@ -648,7 +619,7 @@ body {
 }
 
 .modal-body-custom {
-  padding: 36px 32px 36px;
+  padding: 36px 32px;
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -664,7 +635,6 @@ body {
   margin-bottom: 8px;
 }
 .modal-product-name {
-  font-family: 'Playfair Display', serif;
   font-size: 1.9rem;
   font-weight: 400;
   line-height: 1.2;
@@ -672,7 +642,6 @@ body {
   color: var(--dark);
 }
 
-/* Unique Code Box */
 .product-code-box {
   background: var(--light-bg);
   border: 1px dashed rgba(22,18,14,0.2);
@@ -692,7 +661,6 @@ body {
   margin-bottom: 4px;
 }
 .code-value {
-  font-family: 'Playfair Display', serif;
   font-size: 1.3rem;
   font-weight: 600;
   letter-spacing: 0.12em;
@@ -713,12 +681,8 @@ body {
 .btn-copy:hover { border-color: var(--gold); color: var(--gold); }
 .btn-copy.copied { border-color: #198754; color: #198754; }
 
-/* Modal prices */
-.modal-prices {
-  margin-bottom: 16px;
-}
+.modal-prices { margin-bottom: 16px; }
 .modal-price-now {
-  font-family: 'Playfair Display', serif;
   font-size: 2rem;
   font-weight: 600;
   color: var(--dark);
@@ -739,7 +703,6 @@ body {
   border-top: 1px solid var(--border);
 }
 
-/* Sizes */
 .modal-sizes-block { margin-bottom: 16px; }
 .sizes-label {
   font-size: 0.7rem;
@@ -762,23 +725,13 @@ body {
   font-weight: 500;
   cursor: pointer;
   background: none;
-  font-family: 'Nunito Sans', sans-serif;
   color: var(--dark);
   transition: all var(--transition);
 }
 .size-opt:hover { border-color: var(--gold); color: var(--gold); }
-.size-opt.active {
-  background: var(--dark);
-  border-color: var(--dark);
-  color: var(--cream);
-}
 
-.modal-divider {
-  border-color: var(--border);
-  margin: 16px 0;
-}
+.modal-divider { border-color: var(--border); margin: 16px 0; }
 
-/* Features */
 .feature-item {
   display: flex;
   flex-direction: column;
@@ -794,7 +747,6 @@ body {
   color: var(--gold);
 }
 
-/* WhatsApp button */
 .btn-whatsapp {
   display: flex;
   align-items: center;
@@ -805,7 +757,6 @@ body {
   border: none;
   padding: 15px 24px;
   border-radius: 8px;
-  font-family: 'Nunito Sans', sans-serif;
   font-size: 0.95rem;
   font-weight: 700;
   letter-spacing: 0.04em;
@@ -814,33 +765,18 @@ body {
   transition: background var(--transition), transform 0.15s;
   margin-top: auto;
 }
-.btn-whatsapp:hover {
-  background: #1db954;
-  color: #fff;
-  transform: scale(1.02);
-}
-.wa-icon {
-  width: 22px;
-  height: 22px;
-  fill: #fff;
-  flex-shrink: 0;
-}
+.btn-whatsapp:hover { background: #1db954; color: #fff; transform: scale(1.02); }
+.wa-icon { width: 22px; height: 22px; fill: #fff; flex-shrink: 0; }
 
-/* =============================================
-   TOAST
-   ============================================= */
-#copyToast {
-  border-radius: 8px;
-  font-size: 0.88rem;
-}
+#copyToast { border-radius: 8px; font-size: 0.88rem; }
 
-/* =============================================
-   RESPONSIVE
-   ============================================= */
+/*
+ RESPONSIVE
+*/
 @media (max-width: 768px) {
   .hero-section { padding: 48px 0 40px; }
   .hero-title { font-size: 2.4rem; }
-  .filters-bar { top: 56px; }
+  .filters-bar { top: 78px; }
   #mainNavbar { min-height: 56px; }
   .nav-tab { padding: 14px 12px; font-size: 0.72rem; }
   .promo-banner { padding: 28px 24px; }
@@ -856,3 +792,241 @@ body {
   .promo-banner-title { font-size: 1.6rem; }
   .modal-product-name { font-size: 1.5rem; }
 }
+
+/* =============================================
+   VELOUR — Extensão de Login
+   ============================================= */
+
+.login-page {
+  background: var(--dark);
+  min-height: 100vh;
+  display: flex;
+  align-items: stretch;
+}
+
+.login-wrapper {
+  display: flex;
+  width: 100%;
+  min-height: 100vh;
+}
+
+.login-side {
+  flex: 1;
+  background: var(--dark);
+  border-right: 1px solid rgba(201, 149, 76, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.login-side-bg-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-15deg);
+  font-size: clamp(5rem, 12vw, 14rem);
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.03);
+  letter-spacing: 0.1em;
+  white-space: nowrap;
+  pointer-events: none;
+  user-select: none;
+}
+
+.login-side-content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 40px;
+}
+
+.login-side-tagline {
+  font-size: clamp(2rem, 3.5vw, 3.2rem);
+  font-weight: 400;
+  color: var(--cream);
+  line-height: 1.15;
+  margin-top: 24px;
+  margin-bottom: 40px;
+}
+
+.login-side-dots {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+.login-side-dots span {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(201, 149, 76, 0.35);
+}
+.login-side-dots span:first-child { background: var(--gold); }
+
+.login-form-side {
+  width: 100%;
+  max-width: 480px;
+  background: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 32px;
+}
+
+@media (max-width: 991px) {
+  .login-form-side {
+    max-width: 100%;
+    padding: 40px 24px;
+  }
+}
+
+.login-form-wrap { width: 100%; max-width: 360px; }
+.login-logo-mobile { text-align: center; }
+
+.login-title {
+  font-size: 1.9rem;
+  font-weight: 400;
+  color: var(--dark);
+  margin-bottom: 6px;
+  line-height: 1.2;
+}
+
+.login-subtitle {
+  font-size: 0.88rem;
+  color: var(--muted);
+  margin-bottom: 32px;
+  letter-spacing: 0.02em;
+}
+
+.login-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--dark);
+  display: block;
+  margin-bottom: 8px;
+}
+
+.login-input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.login-input-icon {
+  position: absolute;
+  left: 14px;
+  font-size: 0.95rem;
+  color: var(--muted);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.login-input {
+  width: 100%;
+  background: var(--light-bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 13px 44px 13px 40px;
+  font-size: 0.9rem;
+  color: var(--dark);
+  outline: none;
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+.login-input::placeholder { color: rgba(122, 110, 101, 0.5); }
+.login-input:focus {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(201, 149, 76, 0.12);
+  background: var(--white);
+}
+
+.login-toggle-pass {
+  position: absolute;
+  right: 12px;
+  background: none;
+  border: none;
+  color: var(--muted);
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 4px;
+  line-height: 1;
+  transition: color var(--transition);
+}
+.login-toggle-pass:hover { color: var(--gold); }
+
+.login-forgot {
+  font-size: 0.78rem;
+  color: var(--gold);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color var(--transition);
+}
+.login-forgot:hover { color: var(--gold-light); }
+
+.login-check {
+  width: 17px;
+  height: 17px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  cursor: pointer;
+  accent-color: var(--gold);
+  flex-shrink: 0;
+}
+.login-check-label {
+  font-size: 0.84rem;
+  color: var(--muted);
+  cursor: pointer;
+  user-select: none;
+}
+
+.login-btn {
+  background: var(--dark);
+  color: var(--cream);
+  border: none;
+  padding: 15px 24px;
+  border-radius: 8px;
+  font-size: 0.92rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  transition: background var(--transition), transform 0.15s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.login-btn:hover { background: #2c2520; transform: scale(1.01); }
+.login-btn:active { transform: scale(0.99); }
+
+.login-divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 28px 0 24px;
+  color: var(--muted);
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.login-divider::before,
+.login-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+.login-register-text {
+  text-align: center;
+  font-size: 0.86rem;
+  color: var(--muted);
+  margin: 0;
+}
+.login-register-link {
+  color: var(--gold);
+  font-weight: 600;
+  text-decoration: none;
+  transition: color var(--transition);
+}
+.login-register-link:hover { color: var(--gold-light); }
