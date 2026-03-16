@@ -16,7 +16,7 @@ const produtos = [
   {
     id: 2, codigo: 'VLR-F002',
     nome: 'Camisa Milan',
-    categoria: 'camisetas', genero: 'masculino' ,
+    categoria: 'camisetas', genero: 'masculino',
     preco: 180, precoOriginal: 250,
     imagem: 'img/milan.avif',
     descricao: 'Uma blusa muito popular de um dos times mais conhecidos do futebol.',
@@ -63,7 +63,6 @@ const produtos = [
     tamanhos: ['P', 'M', 'G', 'GG'],
     novo: false, promocao: true,
   },
-
   {
     id: 7, codigo: 'VLR-M001',
     nome: 'Camiseta Pima Cotton',
@@ -124,7 +123,6 @@ const produtos = [
     tamanhos: ['M', 'G', 'GG', 'XG'],
     novo: false, promocao: true,
   },
-
   {
     id: 13, codigo: 'VLR-A001',
     nome: 'Cinto Couro Artesanal',
@@ -168,39 +166,24 @@ const produtos = [
 ];
 
 let state = {
-  section:      'all',
-  category:     'all',
-  maxPrice:     600,
-  sort:         'default',
-  selectedId:   null,
-  cartCount:    0,
+  section:    'all',
+  category:   'all',
+  maxPrice:   600,
+  sort:       'default',
+  selectedId: null,
+  cartCount:  0,
 };
 
 // UTILITÁRIOS
-/**
- * Calcula o percentual de desconto de um produto.
- * @param {number} price
- * @param {number} originalPrice
- * @returns {number}
- */
+
 function discountPct(price, originalPrice) {
   return Math.round((1 - price / originalPrice) * 100);
 }
 
-/**
- * Formata valor para BRL sem casas decimais quando inteiro.
- * @param {number} value
- * @returns {string}
- */
 function formatBRL(value) {
   return `R$ ${value.toLocaleString('pt-BR')}`;
 }
 
-/**
- * Filtra a lista de produtos conforme o estado global.
- * @param {Function} sectionFilter
- * @returns {Array}
- */
 function getFiltered(sectionFilter) {
   let list = produtos.filter(p => {
     const catOk   = state.category === 'all' || p.categoria === state.category;
@@ -220,54 +203,44 @@ function getFiltered(sectionFilter) {
 }
 
 // RENDERIZAÇÃO
-/**
- * Gera o HTML de um card de produto.
- * @param {Object} p - Produto
- * @returns {string}
- */
+
 function cardHTML(p) {
   const pct = p.precoOriginal ? discountPct(p.preco, p.precoOriginal) : 0;
 
-  const badge = p.promocao
-    ? `<span class="badge-promo">-${pct}%</span>`
+  const selo = p.promocao
+    ? `<span class="selo-promo">-${pct}%</span>`
     : p.novo
-      ? `<span class="badge-new">Novo</span>`
+      ? `<span class="selo-novo">Novo</span>`
       : '';
 
-  const pricesHTML = p.precoOriginal
-    ? `<span class="price-now">${formatBRL(p.preco)}</span>
-      <span class="price-was">${formatBRL(p.precoOriginal)}</span>
-      <span class="price-off">-${pct}%</span>`
-    : `<span class="price-now">${formatBRL(p.preco)}</span>`;
+  const precosHTML = p.precoOriginal
+    ? `<span class="preco-atual">${formatBRL(p.preco)}</span>
+       <span class="preco-antigo">${formatBRL(p.precoOriginal)}</span>
+       <span class="preco-off">-${pct}%</span>`
+    : `<span class="preco-atual">${formatBRL(p.preco)}</span>`;
 
   return `
     <div class="col-6 col-md-4 col-xl-3">
-      <div class="product-card" tabindex="0" role="button"
-          aria-label="Ver detalhes de ${p.nome}"
-          onclick="openModal(${p.id})"
-          onkeydown="if(event.key==='Enter')openModal(${p.id})">
-        <div class="product-thumb">
-          <img src="${p.imagem}" alt="${p.nome}" class="product-card-img">
-          ${badge}
-          <div class="badge-wishlist" title="Favoritar" onclick="event.stopPropagation()">
+      <div class="produto" tabindex="0" role="button"
+           aria-label="Ver detalhes de ${p.nome}"
+           onclick="openModal(${p.id})"
+           onkeydown="if(event.key==='Enter')openModal(${p.id})">
+        <div class="produto-foto">
+          <img src="${p.imagem}" alt="${p.nome}" class="foto-produto">
+          ${selo}
+          <div class="favorito" title="Favoritar" onclick="event.stopPropagation()">
             <i class="bi bi-heart"></i>
           </div>
         </div>
-        <div class="product-body">
-          <div class="product-cat-tag">${p.categoria}</div>
-          <div class="product-name">${p.nome}</div>
-          <div class="product-prices">${pricesHTML}</div>
+        <div class="produto-corpo">
+          <div class="produto-tag">${p.categoria}</div>
+          <div class="produto-nome">${p.nome}</div>
+          <div class="produto-preco">${precosHTML}</div>
         </div>
       </div>
     </div>`;
 }
 
-/**
- * Renderiza um grid de produtos em um container.
- * @param {string} gridId
- * @param {Array} items
- * @param {string} countId
- */
 function renderGrid(gridId, items, countId) {
   const grid  = document.getElementById(gridId);
   const count = document.getElementById(countId);
@@ -277,8 +250,8 @@ function renderGrid(gridId, items, countId) {
   if (items.length === 0) {
     grid.innerHTML = `
       <div class="col-12">
-        <div class="no-results">
-          <span class="no-icon">🔍</span>
+        <div class="vazio">
+          <span class="vazio-icone">🔍</span>
           <p>Nenhuma peça encontrada com estes filtros.</p>
         </div>
       </div>`;
@@ -293,60 +266,42 @@ function renderGrid(gridId, items, countId) {
   }
 }
 
-/**
- * Re-renderiza todos os grids com base no estado atual.
- */
 function renderAll() {
   renderGrid('all-grid',        getFiltered(() => true),                    'all-count');
   renderGrid('feminino-grid',   getFiltered(p => p.genero === 'feminino'),  'feminino-count');
   renderGrid('masculino-grid',  getFiltered(p => p.genero === 'masculino'), 'masculino-count');
   renderGrid('acessorios-grid', getFiltered(p => p.genero === 'acessorios'),'acessorios-count');
-  renderGrid('promo-grid',      getFiltered(p => p.promocao),                'promo-count');
+  renderGrid('promo-grid',      getFiltered(p => p.promocao),               'promo-count');
 }
 
-// NAVEGAÇÃO POR ABAS
-/**
- * Exibe a seção escolhida e atualiza estado.
- * @param {string} section
- */
+// NAVEGAÇÃO
+
 function showSection(section) {
   state.section = section;
 
-  // Sections
-  document.querySelectorAll('.store-section').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.secao').forEach(el => el.classList.remove('active'));
   const target = document.getElementById(`${section}-section`);
   if (target) target.classList.add('active');
 
-  // Tabs
-  document.querySelectorAll('.nav-tab').forEach(btn => {
+  document.querySelectorAll('.aba').forEach(btn => {
     btn.classList.toggle('active', btn.dataset.section === section);
   });
 
-  // Hero só aparece na aba "Tudo"
   const heroArea = document.getElementById('heroArea');
   if (heroArea) heroArea.style.display = section === 'all' ? '' : 'none';
 
-  // Scroll para topo
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 // FILTROS
-/**
- * Atualiza o filtro de categoria.
- * @param {string} cat
- * @param {HTMLElement} btn
- */
+
 function filterCategory(cat, btn) {
   state.category = cat;
-  document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.btn-filtro').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
   renderAll();
 }
 
-/**
- * Atualiza o filtro de preço.
- * @param {HTMLInputElement} input
- */
 function filterPrice(input) {
   state.maxPrice = parseInt(input.value);
   const pct = ((state.maxPrice - 50) / (600 - 50)) * 100;
@@ -355,20 +310,13 @@ function filterPrice(input) {
   renderAll();
 }
 
-/**
- * Atualiza a ordenação.
- * @param {string} value
- */
 function sortProdutos(value) {
   state.sort = value;
   renderAll();
 }
 
 // MODAL
-/**
- * Abre o modal de detalhe de um produto.
- * @param {number} id
- */
+
 function openModal(id) {
   const p = produtos.find(x => x.id === id);
   if (!p) return;
@@ -376,67 +324,53 @@ function openModal(id) {
 
   const pct = p.precoOriginal ? discountPct(p.preco, p.precoOriginal) : 0;
 
-  // Imagem / emoji
   const imgEl = document.getElementById('modalImg');
   imgEl.innerHTML = `<img src="${p.imagem}" alt="${p.nome}" class="img-fluid">`;
   if (p.promocao) {
-    imgEl.innerHTML += `<span class="badge-promo" style="top:14px;left:14px;position:absolute">-${pct}%</span>`;
+    imgEl.innerHTML += `<span class="selo-promo" style="top:14px;left:14px;position:absolute">-${pct}%</span>`;
   } else if (p.novo) {
-    imgEl.innerHTML += `<span class="badge-new" style="top:14px;left:14px;position:absolute">Novo</span>`;
+    imgEl.innerHTML += `<span class="selo-novo" style="top:14px;left:14px;position:absolute">Novo</span>`;
   }
 
-  // Textos
   document.getElementById('modalCat').textContent  = `${p.categoria.toUpperCase()} · ${p.genero.toUpperCase()}`;
   document.getElementById('modalName').textContent = p.nome;
   document.getElementById('modalCode').textContent = p.codigo;
   document.getElementById('modalDesc').textContent = p.descricao;
 
-  // Preços
-  const pricesEl = document.getElementById('modalPrices');
+  const precosEl = document.getElementById('modalPrices');
   if (p.precoOriginal) {
-    pricesEl.innerHTML = `
-      <span class="modal-price-now">${formatBRL(p.preco)}</span>
-      <span class="modal-price-was">${formatBRL(p.precoOriginal)}</span>
-      <span class="price-off">-${pct}%</span>`;
+    precosEl.innerHTML = `
+      <span class="modal-preco-atual">${formatBRL(p.preco)}</span>
+      <span class="modal-preco-antigo">${formatBRL(p.precoOriginal)}</span>
+      <span class="preco-off">-${pct}%</span>`;
   } else {
-    pricesEl.innerHTML = `<span class="modal-price-now">${formatBRL(p.preco)}</span>`;
+    precosEl.innerHTML = `<span class="modal-preco-atual">${formatBRL(p.preco)}</span>`;
   }
 
-  // Tamanhos
-  const sizesEl = document.getElementById('modalSizes');
-  sizesEl.innerHTML = p.tamanhos.map((s, i) => `
-    <button class="size-opt${i === 0 ? ' active' : ''}"
+  const tamanhoEl = document.getElementById('modalSizes');
+  tamanhoEl.innerHTML = p.tamanhos.map((s, i) => `
+    <button class="tamanho${i === 0 ? ' active' : ''}"
             onclick="selectSize(this)">${s}</button>
   `).join('');
 
-  // Link WhatsApp
   const msg = encodeURIComponent(
     `Olá! Tenho interesse no produto:\n*${p.nome}*\nCódigo: ${p.codigo}\nPreço: ${formatBRL(p.preco)}\n\nPoderia me dar mais informações?`
   );
   document.getElementById('whatsappLink').href = `https://wa.me/${WHATSAPP_NUMBER}?text=${msg}`;
 
-  // Reset botão copiar
   const copyBtn = document.getElementById('copyCodeBtn');
   copyBtn.innerHTML = '<i class="bi bi-clipboard"></i>';
   copyBtn.classList.remove('copied');
 
-  // Abrir modal Bootstrap
   const modal = bootstrap.Modal.getOrCreateInstance(document.getElementById('productModal'));
   modal.show();
 }
 
-/**
- * Seleciona um tamanho no modal.
- * @param {HTMLElement} btn
- */
 function selectSize(btn) {
-  document.querySelectorAll('.size-opt').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.tamanho').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
 }
 
-/**
- * Copia o código do produto para a área de transferência.
- */
 function copyCode() {
   const p = produtos.find(x => x.id === state.selectedId);
   if (!p) return;
@@ -446,7 +380,6 @@ function copyCode() {
     copyBtn.innerHTML = '<i class="bi bi-clipboard-check"></i>';
     copyBtn.classList.add('copied');
 
-    // Toast
     const toastEl = document.getElementById('copyToast');
     const toast   = bootstrap.Toast.getOrCreateInstance(toastEl, { delay: 2500 });
     toast.show();
@@ -456,7 +389,6 @@ function copyCode() {
       copyBtn.classList.remove('copied');
     }, 3000);
   }).catch(() => {
-    // Fallback para browsers sem clipboard API
     const ta = document.createElement('textarea');
     ta.value = p.codigo;
     document.body.appendChild(ta);
@@ -466,11 +398,8 @@ function copyCode() {
   });
 }
 
-// ─── ANIMAÇÃO DE ENTRADA ─────────────────────────────────────────────────────
+// ANIMAÇÕES
 
-/**
- * Aplica animação de entrada nos elementos com [data-animate].
- */
 function initAnimations() {
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -484,11 +413,8 @@ function initAnimations() {
   document.querySelectorAll('[data-animate]').forEach(el => observer.observe(el));
 }
 
-// ─── NAVBAR SCROLL ────────────────────────────────────────────────────────────
+// NAVBAR SCROLL
 
-/**
- * Adiciona classe ao navbar quando a página é rolada.
- */
 function initNavbarScroll() {
   const navbar = document.getElementById('mainNavbar');
   window.addEventListener('scroll', () => {
@@ -498,34 +424,28 @@ function initNavbarScroll() {
   }, { passive: true });
 }
 
-// ─── INICIALIZAÇÃO ────────────────────────────────────────────────────────────
+// INICIALIZAÇÃO
 
 document.addEventListener('DOMContentLoaded', () => {
 
-  // Tabs de seção
-  document.querySelectorAll('.nav-tab').forEach(btn => {
+  document.querySelectorAll('.aba').forEach(btn => {
     btn.addEventListener('click', () => showSection(btn.dataset.section));
   });
 
-  // Filtros de categoria
-  document.querySelectorAll('.cat-btn').forEach(btn => {
+  document.querySelectorAll('.btn-filtro').forEach(btn => {
     btn.addEventListener('click', () => filterCategory(btn.dataset.cat, btn));
   });
 
-  // Slider de preço
   const priceRange = document.getElementById('priceRange');
   priceRange.style.setProperty('--pct', '100%');
   priceRange.addEventListener('input', () => filterPrice(priceRange));
 
-  // Ordenação
   document.getElementById('sortSelect').addEventListener('change', function () {
     sortProdutos(this.value);
   });
 
-  // Botão copiar código
   document.getElementById('copyCodeBtn').addEventListener('click', copyCode);
 
-  // Render inicial
   renderAll();
   initAnimations();
   initNavbarScroll();
