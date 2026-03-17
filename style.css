@@ -1024,3 +1024,11 @@ input, button, select, textarea { font-family: inherit; }
   transition: color var(--transicao);
 }
 .registro-link:hover { color: var(--gold-light); }
+
+footer{
+  background: var(--dark);
+  font-size: clamp(7rem, 7vw, 7rem);
+
+  color: rgba(255,255,255,0.03);
+  letter-spacing: 0.12em;
+}
