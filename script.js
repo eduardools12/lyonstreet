@@ -215,16 +215,16 @@ function cardHTML(p) {
 
   const precosHTML = p.precoOriginal
     ? `<span class="preco-atual">${formatBRL(p.preco)}</span>
-       <span class="preco-antigo">${formatBRL(p.precoOriginal)}</span>
-       <span class="preco-off">-${pct}%</span>`
+      <span class="preco-antigo">${formatBRL(p.precoOriginal)}</span>
+      <span class="preco-off">-${pct}%</span>`
     : `<span class="preco-atual">${formatBRL(p.preco)}</span>`;
 
   return `
     <div class="col-6 col-md-4 col-xl-3">
       <div class="produto" tabindex="0" role="button"
-           aria-label="Ver detalhes de ${p.nome}"
-           onclick="openModal(${p.id})"
-           onkeydown="if(event.key==='Enter')openModal(${p.id})">
+          aria-label="Ver detalhes de ${p.nome}"
+          onclick="openModal(${p.id})"
+          onkeydown="if(event.key==='Enter')openModal(${p.id})">
         <div class="produto-foto">
           <img src="${p.imagem}" alt="${p.nome}" class="foto-produto">
           ${selo}
